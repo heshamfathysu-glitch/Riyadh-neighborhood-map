@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#03050B"><meta name="description" content="خريطة تفاعلية لأحياء مدينة الرياض. حدود حقيقية قابلة للتحديد والبحث مع مؤشرات جاهزة للبيانات الموثقة.">
+<title>خريطة أحياء الرياض | PLAN C Urban Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#03050b;--panel:#090d17;--panel2:#0c1120;--stroke:rgba(180,193,220,.13);--muted:#8c97b0;--text:#f5f5f2;--orange:#fe5000;--blue:#6cace4;--navy:#001e60;--cream:#e5e3da;--good:#94c2ab;--warning:#e5b57e;--font:'IBM Plex Sans Arabic','Noto Sans Arabic',Tahoma,sans-serif;--mono:'IBM Plex Mono',monospace;--display:'Chakra Petch',sans-serif}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:var(--font)}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--orange);outline-offset:3px}a{color:inherit}.app{min-height:100dvh;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(90% 70% at 64% 110%,rgba(0,30,96,.19),transparent 74%),#03050b}
+.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:1px solid var(--stroke);background:rgba(3,5,11,.94);z-index:20;gap:16px}.brand{display:flex;align-items:center;gap:14px;white-space:nowrap}.logo-icon{height:40px;width:40px;display:block;flex:none}.logo-icon svg{display:block;width:100%;height:100%}.brandword{font:700 21px var(--display);letter-spacing:.05em;line-height:1.08;direction:ltr}.brandword span{color:var(--orange)}.brand small{display:block;color:var(--muted);font:500 9px var(--mono);letter-spacing:.15em;margin-top:6px;direction:ltr}.topcenter{display:flex;align-items:center;gap:13px;color:var(--muted);font:500 11px var(--mono);direction:ltr}.live-dot{width:8px;height:8px;background:var(--orange);box-shadow:0 0 15px rgba(254,80,0,.75);border-radius:100%}.topaction{border:1px solid var(--stroke);background:#111621;color:#ddd;padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:12px}.topaction:hover,.ghost:hover{border-color:rgba(254,80,0,.6)}
+.workspace{display:grid;grid-template-columns:330px minmax(0,1fr);flex:1;min-height:0;height:calc(100dvh - 76px)}.sidebar{border-left:1px solid var(--stroke);padding:28px 24px 20px;display:flex;flex-direction:column;overflow:auto;background:linear-gradient(145deg,#0b101b,#06090f 70%)}.eyebrow{color:var(--orange);font:600 10px var(--mono);letter-spacing:.17em;direction:ltr;text-align:right}.sidebar h1{font-weight:600;font-size:clamp(28px,2.7vw,40px);letter-spacing:-.055em;line-height:1.22;margin:12px 0}.sidebar h1 b{color:var(--orange);font-weight:600}.sub{font-size:12px;color:#aab3c2;line-height:1.9;margin:2px 0 22px}.searchbox{position:relative;margin-top:2px}.searchbox input{width:100%;background:#111726;border:1px solid #263048;border-radius:0;color:#fff;padding:15px 42px 15px 12px;outline:0;font-size:13px}.searchbox input::placeholder{color:#6f7f94}.searchbox input:focus{border-color:var(--orange)}.searchglyph{position:absolute;right:16px;top:14px;color:#8694ae;font-size:18px;pointer-events:none}.search-results{position:absolute;left:0;right:0;top:calc(100% + 4px);max-height:258px;overflow:auto;background:#121a2b;border:1px solid #34425b;z-index:30;box-shadow:0 20px 30px rgba(0,0,0,.4)}.suggestion{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;border-bottom:1px solid #20293a;color:#f4f5f5;text-align:right;padding:10px 14px;font-size:13px}.suggestion:hover{background:#202b41}.suggestion small{color:#8d9aaa;direction:ltr}.section-label{display:flex;justify-content:space-between;align-items:center;margin:26px 0 10px;font-size:11px;color:#a3adbd}.section-label span:last-child{font:500 10px var(--mono);color:#738197;direction:ltr}.neighborhood-list{display:flex;flex-wrap:wrap;gap:7px}.neighborhood-list button{color:#bcc7da;background:#101726;border:1px solid #273249;padding:8px 10px;font-size:11px;transition:.2s}.neighborhood-list button:hover{border-color:var(--blue);color:#fff}.neighborhood-list button.active{background:rgba(254,80,0,.15);border-color:var(--orange);color:#fff}.selected-box{background:linear-gradient(115deg,rgba(254,80,0,.12),transparent 90%);border:1px solid rgba(254,80,0,.25);padding:14px;margin-top:26px;position:relative;clip-path:polygon(20px 0,100% 0,100% 100%,0 100%,0 20px)}.selected-box .subtitle{font:600 10px var(--mono);color:var(--orange);direction:ltr;text-align:right}.selected-name{font-size:19px;font-weight:600;margin:5px 0}.selected-meta{display:flex;gap:6px;color:#a6aec1;font-size:11px;margin-bottom:12px}.primary{width:100%;padding:12px 10px;border:1px solid var(--orange);background:var(--orange);color:#fff;font-size:12px;font-weight:600}.primary:hover{filter:brightness(1.12)}.primary:disabled{opacity:.35;cursor:default}.divider{height:1px;background:var(--stroke);margin:20px 0}.sidebar-footer{margin-top:auto;padding-top:26px}.source-link{font-size:11px;color:#90abcf;text-decoration:none;border-bottom:1px solid #4d658a}.source-link:hover{color:white}.source-note{color:#798498;font-size:10px;line-height:1.8;margin:8px 0 0}.import-btn{background:transparent;border:1px solid #263449;color:#d8d9dc;font-size:11px;width:100%;padding:12px;margin-top:12px;text-align:center}.import-btn:hover{border-color:var(--blue)}
+.stage{position:relative;overflow:hidden;min-width:0;background:radial-gradient(60% 75% at 46% 75%,rgba(0,30,96,.27),transparent 72%),linear-gradient(160deg,#07101e 0%,#050912 45%,#03050b 100%)}.stage::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;opacity:.13;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 170 170' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.57' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23ffffff' filter='url(%23n)' d='M0 0h170v170H0z'/%3E%3C/svg%3E");mix-blend-mode:overlay}.stage-header{position:absolute;top:28px;right:30px;z-index:8;pointer-events:none}.map-kicker{font:500 12px var(--mono);direction:ltr;color:var(--blue);letter-spacing:.18em}.map-title{font:600 clamp(23px,3vw,40px) var(--font);margin:6px 0 0;line-height:1.4}.map-subtitle{font:500 11px var(--font);color:#8092b1;margin-top:4px}.map-number{position:absolute;top:31px;left:34px;z-index:8;direction:ltr;text-align:left}.map-number strong{display:block;font:600 36px var(--display)}.map-number small{font:500 10px var(--mono);letter-spacing:.12em;color:#8e9aad}.map-container{position:absolute;inset:0;touch-action:none;cursor:grab}.map-container.grabbing{cursor:grabbing}.map-svg{width:100%;height:100%;display:block;user-select:none}.geo-grid line{stroke:#5b7eae;stroke-opacity:.09;stroke-width:.8;vector-effect:non-scaling-stroke}.geo-grid text{fill:#456382;font-size:10px;opacity:.65;pointer-events:none;font-family:var(--mono)}.district-path{fill:#13243e;fill-opacity:.76;stroke:#5d7c9e;stroke-opacity:.53;stroke-width:1.14;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .16s,stroke .16s,filter .16s}.district-path:hover{fill:#1c5282;fill-opacity:.9;stroke:#b4d8f1;stroke-opacity:.9}.district-path.is-selected{fill:var(--orange);fill-opacity:.84;stroke:#ffdcc8;stroke-width:1.7;stroke-opacity:1;filter:drop-shadow(0 0 6px rgba(254,80,0,.52))}.district-label{fill:#dce8f8;opacity:.76;font:500 13px var(--font);text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:#0b1830;stroke-width:2.6px;stroke-opacity:.94;pointer-events:none;user-select:none}.district-label.is-selected{fill:white;opacity:1;font-weight:700;stroke:#49200e}.map-hint{position:absolute;z-index:8;bottom:24px;right:28px;display:flex;gap:10px;align-items:center;padding:11px 14px;background:rgba(6,13,24,.83);border:1px solid var(--stroke);color:#9cacc2;font-size:11px;backdrop-filter:blur(14px)}.map-hint .square{width:12px;height:12px;background:var(--orange);border:1px solid #ffbd9c}.map-controls{position:absolute;left:25px;bottom:23px;z-index:8;display:flex;gap:7px;direction:ltr}.map-controls button{border:1px solid #34445d;background:rgba(7,13,25,.9);color:#eee;width:43px;height:43px;display:grid;place-items:center;font:500 23px var(--mono);backdrop-filter:blur(12px)}.map-controls button:hover{border-color:var(--orange)}.map-controls .text-btn{font:500 10px var(--font);width:auto;padding:0 13px;direction:rtl}.north-mark{position:absolute;top:107px;left:30px;z-index:6;font:500 11px var(--mono);color:#8099b9;display:flex;align-items:center;gap:6px;direction:ltr}.north-mark .arrow{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:15px solid var(--blue)}.data-mode{position:absolute;left:27px;top:158px;z-index:8;display:flex;flex-direction:column;gap:6px}.data-mode button{border:1px solid #2a394e;background:rgba(10,17,31,.82);color:#9ba9bd;padding:10px 15px;font-size:11px;backdrop-filter:blur(9px)}.data-mode button.active{border-color:#5181af;background:#10243d;color:#fff}.statusbar{position:absolute;bottom:78px;right:28px;z-index:7;font:500 10px var(--mono);color:#8395b0;direction:ltr;background:rgba(4,8,16,.75);padding:5px 9px}
+.details{position:absolute;top:0;bottom:0;left:0;width:min(398px,100%);background:linear-gradient(165deg,rgba(15,23,39,.98),rgba(6,9,17,.98));z-index:12;border-right:1px solid #314059;box-shadow:20px 0 80px rgba(0,0,0,.47);transform:translateX(-105%);transition:transform .28s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;overflow:auto}.details.open{transform:translateX(0)}.details::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#001e60,#6cace4,#fff,#fe5000)}.details-top{padding:22px 27px 15px;display:flex;justify-content:space-between;align-items:center}.details-top .id{font:500 11px var(--mono);color:var(--blue);direction:ltr}.close{width:35px;height:35px;color:#bfc7d8;background:#172137;border:1px solid #32415a;font-size:22px;line-height:1}.details-content{padding:12px 27px 27px}.details h2{font-size:33px;line-height:1.3;font-weight:600;margin:5px 0 3px}.details .en{font:500 11px var(--mono);color:var(--muted);direction:ltr}.accent-rule{height:2px;width:50px;background:var(--orange);margin:24px 0}.section-id{display:flex;gap:12px;align-items:center;color:#9babc2;font:500 10px var(--mono);direction:ltr;justify-content:flex-end;margin-bottom:15px}.section-id b{color:var(--orange)}.fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fact{min-height:109px;border:1px solid var(--stroke);background:rgba(24,35,56,.45);padding:14px;display:flex;flex-direction:column;justify-content:space-between}.fact b{font:600 24px var(--display);color:#f7f5f0;direction:ltr;text-align:right}.fact label{font-size:11px;color:#a5afc1}.fact small{font-size:10px;color:#77859a}.fact b.unknown{color:#647089}.nation-box{padding:15px;background:rgba(255,255,255,.018);border:1px solid var(--stroke)}.nation-head{display:flex;justify-content:space-between;font-size:12px;margin-bottom:15px}.nation-head strong{font:600 13px var(--mono)}.nation-track{display:flex;height:7px;background:#202a3d;gap:3px}.nation-track div{width:50%;background:repeating-linear-gradient(45deg,#28354d,#28354d 4px,#1b273a 4px,#1b273a 8px)}.nation-row{display:flex;justify-content:space-between;margin-top:11px;color:#9faac0;font-size:12px}.fact-status{border-right:2px solid var(--orange);padding:10px 13px;background:rgba(254,80,0,.07);font-size:11px;color:#aeb9ce;line-height:1.9;margin:19px 0}.city-ref{background:#101b2d;padding:14px;border:1px solid #283e5c;margin:16px 0}.city-ref h4{margin:0 0 8px;font-size:12px;color:#d9e9fc}.city-ref p{margin:0;font-size:11px;color:#91a5be;line-height:1.7}.footnote{font-size:10px;color:#8392a7;line-height:1.9}.detail-link{display:block;margin-top:12px;color:var(--blue);font-size:11px;text-decoration:none}.detail-link:hover{text-decoration:underline}
+.toast{position:absolute;left:50%;bottom:27px;transform:translateX(-50%) translateY(140px);z-index:50;background:#172337;border:1px solid #3d5571;color:#e5ecf7;padding:13px 19px;font-size:12px;transition:transform .25s;pointer-events:none;white-space:nowrap}.toast.show{transform:translateX(-50%) translateY(0)}.mobile-cue{display:none}.mobile-detail-trigger{display:none}.hidden{display:none!important}
+@media(max-width:1100px){.workspace{grid-template-columns:285px minmax(0,1fr)}.sidebar{padding:23px 18px}.topbar{padding:0 18px}.stage-header{right:19px;top:19px}.map-number{left:18px}.map-controls{left:13px}.map-hint{right:13px}.details{width:360px}}
+@media(max-width:760px){.topbar{height:62px;padding:0 13px}.topcenter{display:none}.brandword{font-size:17px}.logo-icon{height:32px;width:32px;font-size:17px}.brand small{font-size:7px}.topaction{font-size:10px;padding:8px}.workspace{display:block;height:calc(100dvh - 62px);min-height:700px}.sidebar{height:185px;padding:14px 14px 12px;overflow:visible;position:relative;z-index:9;border-left:0;border-bottom:1px solid var(--stroke);background:#070c16}.sidebar .eyebrow,.sidebar .sub,.sidebar .section-label,.sidebar .neighborhood-list,.sidebar .selected-box,.sidebar .divider,.sidebar .sidebar-footer{display:none}.sidebar h1{font-size:23px;margin:0 0 12px}.searchbox{max-width:none}.searchbox input{padding:11px 40px 11px 12px}.searchglyph{top:10px}.stage{height:calc(100dvh - 247px);min-height:420px}.stage-header{top:15px;right:14px}.map-title{font-size:18px}.map-subtitle{display:none}.map-kicker{font-size:8px}.map-number{top:16px;left:15px}.map-number strong{font-size:24px}.map-number small{font-size:8px}.north-mark{display:none}.data-mode{top:88px;left:12px}.data-mode button{padding:7px 9px;font-size:10px}.map-hint{bottom:15px;right:10px;padding:8px 9px;font-size:10px;max-width:55%;line-height:1.5}.map-controls{left:8px;bottom:10px;gap:5px}.map-controls button{width:35px;height:35px;font-size:19px}.map-controls .text-btn{font-size:9px;padding:0 8px}.statusbar{bottom:65px;right:10px;font-size:8px}.mobile-detail-trigger{display:block;position:absolute;bottom:63px;right:10px;z-index:9;background:var(--orange);border:0;color:white;font-size:12px;font-weight:600;padding:11px 15px;box-shadow:0 8px 25px rgba(254,80,0,.28)}.details{width:100%;top:auto;bottom:0;height:min(72dvh,590px);border-top:1px solid #4b658a;border-right:0;transform:translateY(105%);border-radius:14px 14px 0 0}.details.open{transform:translateY(0)}.details h2{font-size:28px}.details-content{padding:7px 22px 30px}.details-top{padding:16px 22px}.mobile-cue{display:block;position:absolute;top:6px;left:calc(50% - 23px);height:4px;width:46px;border-radius:9px;background:#425371}.sidebar .section-label,.sidebar .neighborhood-list{display:none}.footnote{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body><div class="app">
+<header class="topbar"><div class="brand"><div class="logo-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500"><g transform="scale(0.98)"><path d="M1 1H1213L1479 267V702L1387 610V333H333V1387H1387V1017L1479 1109V1479H267L1 1213Z" fill="#FFFFFF"></path><path d="M395 395H825V683H487V825H395Z M487 487V589H732V487Z M894 395H987V733H1325V825H894Z M395 894H825V1324H732V1186H487V1324H395Z M487 987V1093H732V987Z M894 894H990L1231 1181V894H1325V1324H1229L987 1035V1324H894Z" fill="#FFFFFF" fill-rule="evenodd"></path><g fill="#8A8A8A"><path d="M1370 56a55 55 0 1 0 110 0a55 55 0 1 0 -110 0Z M1381 56a44 44 0 1 1 88 0a44 44 0 1 1 -88 0Z" fill-rule="evenodd"></path><path d="M1406 28H1431Q1446 28 1446 43Q1446 54 1436 57L1451 83H1437L1424 59H1419V83H1406Z M1419 38V49H1430Q1434 49 1434 43.5Q1434 38 1430 38Z" fill-rule="evenodd"></path></g></g></svg></div><div><div class="brandword">PLAN<span>/</span>C</div><small>THE THIRD DIMENSION</small></div></div><div class="topcenter"><span class="live-dot"></span><span>GEOSPATIAL INTERFACE / RIYADH / 2026</span></div><button class="topaction" id="exportBtn" title="تصدير قائمة الأحياء المحددة">↓ &nbsp;تصدير المحدد</button></header>
+<div class="workspace"><aside class="sidebar"><div class="eyebrow">01 / URBAN EXPLORER</div><h1>أحياء <b>الرياض.</b></h1><p class="sub">حدود جغرافية، معلومات حضرية، وتحديد تفاعلي. اضغط على أي حي لتحديده، واضغط مرتين لعرض التفاصيل.</p><div class="searchbox"><span class="searchglyph">⌕</span><input id="search" type="search" autocomplete="off" placeholder="ابحث باسم الحي..." aria-label="البحث عن حي"><div class="search-results hidden" id="results"></div></div><div class="section-label"><span>أحياء سريعة الوصول</span><span>QUICK ACCESS</span></div><div class="neighborhood-list" id="quick"></div><div class="selected-box"><div class="subtitle">SELECTED DISTRICT</div><div id="selectedName" class="selected-name">لم يتم تحديد حي</div><div class="selected-meta" id="selectedMeta">انقر على إحدى المساحات في الخريطة</div><button class="primary" id="detailsBtn" disabled>عرض معلومات الحي ↗</button></div><div class="sidebar-footer"><div class="divider"></div><div class="eyebrow">DATA INTEGRITY</div><p class="source-note">الحدود: بيانات منشورة على GitHub مستمدة من خرائط مفتوحة. تشمل <span id="countSide">145</span> حيًا في هذه النسخة، ولا تمثل كل أحياء الرياض. لا تُنشأ أرقام سكانية أو تجارية دون مصدر.</p><a class="source-link" href="https://github.com/i1s1i/GIS-rcrc-map" target="_blank" rel="noopener noreferrer">المصدر الجغرافي ↗</a><label class="import-btn" for="importCsv">+ استيراد إحصاءات الأحياء CSV</label><input id="importCsv" class="hidden" type="file" accept=".csv,text/csv"><p class="source-note" id="dataStatus">لا توجد بيانات إحصائية محلية محمّلة.</p></div></aside>
+<main class="stage" id="stage" aria-label="خريطة تفاعلية لأحياء الرياض"><div class="stage-header"><div class="map-kicker">RIYADH / GIS EXPLORE</div><div class="map-title">خريطة الأحياء</div><div class="map-subtitle">رسم الحدود حسب الإحداثيات — دون تقسيمات لونية للمناطق</div></div><div class="map-number"><strong id="countTop">145</strong><small>MAPPED DISTRICTS</small></div><div class="north-mark"><i class="arrow"></i>N</div><div class="data-mode"><button id="coreBtn" class="active">تركيز المدينة</button><button id="allBtn">جميع الأحياء</button><button id="clearBtn">إزالة التحديد</button></div><div class="map-container" id="mapContainer"><svg class="map-svg" id="mapSvg" role="img" aria-label="خريطة حدود أحياء الرياض، يمكن الضغط على مضلع أي حي لتحديده" viewBox="0 0 1100 1000"><g class="geo-grid" id="geoGrid"></g><g id="districtLayer"></g><g id="labelLayer"></g></svg></div><div class="statusbar" id="mapStatus">LOCAL VECTOR / OPEN GEODATA</div><button class="mobile-detail-trigger hidden" id="mobileDetailBtn">تفاصيل الحي ↗</button><div class="map-hint"><span class="square"></span><span>نقرة: تحديد الحي <span style="opacity:.6">/</span> نقرتان: التفاصيل</span></div><div class="map-controls"><button id="plus" aria-label="تكبير">+</button><button id="minus" aria-label="تصغير">−</button><button id="reset" class="text-btn">إعادة الضبط</button></div>
+<section class="details" id="details" role="dialog" aria-modal="false" aria-labelledby="detailName"><div class="mobile-cue"></div><div class="details-top"><span class="id">02 / DISTRICT INTELLIGENCE</span><button class="close" id="closeDetails" aria-label="إغلاق التفاصيل">×</button></div><div class="details-content"><div class="eyebrow">RIYADH · NEIGHBORHOOD PROFILE</div><h2 id="detailName">—</h2><div class="en" id="detailEn">DISTRICT DATA / PROFILE</div><div class="accent-rule"></div><div class="section-id"><b>01</b> SPATIAL OVERVIEW</div><div class="fact-grid"><div class="fact"><label>مساحة الحي (تقريبًا)</label><b id="area">—</b><small>كم² · محسوبة من الحدود</small></div><div class="fact"><label>عدد السكان (تقديري)</label><b class="unknown" id="population">—</b><small id="populationYear">يتطلب بيانات للحي</small></div><div class="fact"><label>الأنشطة التجارية</label><b class="unknown" id="businesses">—</b><small>عدد المنشآت / السجلات</small></div><div class="fact"><label>إحداثيات المركز</label><b style="font-size:12px" id="coords">—</b><small>خط العرض، خط الطول</small></div></div><div class="section-id" style="margin-top:27px"><b>02</b> DEMOGRAPHICS</div><div class="nation-box"><div class="nation-head"><span>التوزيع السكاني حسب الجنسية</span><strong id="nationNote">N / A</strong></div><div class="nation-track"><div id="saudiBar"></div><div id="foreignBar"></div></div><div class="nation-row"><span>سعوديون</span><b id="saudi">—</b></div><div class="nation-row"><span>غير سعوديين</span><b id="foreign">—</b></div></div><div class="fact-status" id="qualityNote">لا تتوفر حاليًا إحصاءات موثقة قابلة للإسناد إلى هذا الحي. الشرطات تعني بيانات غير متاحة وليست صفرًا.</div><div class="city-ref"><h4>مؤشر عام للمدينة — ليس تقديرًا للحي</h4><p>تنشر أمانة الرياض نسبة 47.8% سعوديين و52.2% غير سعوديين على مستوى المدينة. لا يجوز افتراض أن النسب نفسها تنطبق على كل حي.</p></div><div class="section-id" style="margin-top:26px"><b>03</b> DATA PROVENANCE</div><p class="footnote" id="sourceDescription">حدود الحي: مصدر خرائط مفتوحة. المساحة ناتجة عن حساب هندسي تقريبي، وليست مساحة مساحية معتمدة. أرقام السكان والأنشطة لا تظهر إلا إذا أدخلت ملف بيانات مع المصدر والسنة.</p><a class="detail-link" target="_blank" rel="noopener noreferrer" href="https://rmp.alriyadh.gov.sa/ar/gis-portal">التحقق من بوابة أمانة الرياض المكانية ↗</a><a class="detail-link" target="_blank" rel="noopener noreferrer" href="https://mc.gov.sa/ar/About/Statistics/Pages/GISInfo.aspx">الاستعلام عن سجلات وزارة التجارة ↗</a></div></section>
+<div class="toast" id="toast"></div>
+</main></div></div>
+<script>
+// Original precise coordinates: https://github.com/i1s1i/GIS-rcrc-map/blob/main/data/riyadh_districts.geojson
+// Fallback below has RDP-simplified polygon boundaries (~50 m tolerance). The browser
+// loads the original GeoJSON when reachable, and otherwise uses the bundled geometry.
+const COMPACT = `القدس|f4hee-jbg1kNh0ixf4he
+الروضة|f4heh0ixjYgghEe9f4he
+الأندلس|jrjIiPiKi4hOjYggkjhSk0hejrjI
+النهضة|k0hen4jhk0hejrjHjrjIn4jhoWj7jrjInQlhoWj7
+حي الخليج|jNjyjrjInQlhmOnEjxlcialDiykgjPj4jLj1jNjy
+اشبيلية|hfmhialDjxlcmOnElYoShymqhfmh
+الحمراء|eOlChfmhialDhqkke-jbeOlC
+اليرموك|hfmhhymqlYoSlIoqkXpyhgofguoIhfmh
+قرطبة|fPrTguoIddmpcsoXcrowcypKdXqRfPrT
+المونسية|ibtEjNrUjdrIkXpyhgofguoIfPrTibtE
+حي الفيحاء|mGdIkNcKlIaXnCbVmGdI
+حي السعادة|mGdInCbVpvcrptdrpnfRnIdmmGdI
+حي النور|l9YykTX9leVlmwU2nWVJnyVWm_W2l9Yy
+حي السلى|pyZEtqZJt7YdnyVWlIaXprcqpyZE
+حي المشاعل|nxUKoBT_oNTzoxTLpWSvq4SUq8SjrESltxTSu6TUuZUQuNUwt-WPt5WXt2XMtlXstkYAtcYLtbYNmwU2mwU2nxUK
+حي الجزيرة|j1Y9kTX9jXZ-iua6ihbhkNcKlIaXl9YykTX9
+حي الروابي|ihbhiYcTiJdBiJdBi6dTildwkFexkGexlcc1j1b_ihbh
+حي الريان|jDgSkGexildwi6dTiJdBhwd7hEe9imf_jDgS
+حي المنار|kjhSjYggjDgSkGexllfxkjhS
+النسيم الغربي|kjhSmbijo-e1nFdlkjhS
+النسيم الشرقي|mbijoFjnoijkpIihqagsqggSqUfwo-e1mbij
+حي المعيزيلة|oWj7p-mPqAmVqBmeqBmsp7nBo2o5owpMn4osn0oyl_nZoWj7jrjInQlhoWj7
+حي القادسية|l_nZmvn-n0oyn4osoxpNowpYoxpmo0pxpJrRotrFmDqdkXpyl_nZ
+حي الرمال|oVxckbvik_ugibtEjNrUjdrIkXpymDqdotrFpJrRpNrlpPrzpPsHpOsZoVxc
+حي الجنادرية|spqJp-mPqCmlp6nCo3o0owpYoxpmo0pxpJrRpRrWparerFtYriugrnu5rpvAsDvms6wUtrwjuJwzu9xjwOyTxXzLyzz0zz0w0b1M1B1d1l1m2R1p2a1p3C1l2q1P2d061-zr1GyNzTwbyAu8tdrNspqJ
+حي الرماية|toltuLlAuEk8uFk3uOk4uLjyuEjys0jxs0jUs0jGtHixs2iiqxiipqh1oWj7rOoDstnDtolt
+حي النظيم|spqJrvozrOoDstnDuLlAuEk8uFk3uQk5xZlQyNnRzwoj0mo00Zpm02q52ir43EsH37tF4ftg4yt16zuV77vU8jvP7uzf6p2V6W2S4d1k4G1X3z1U3X1c3L1c291Z2x1V2n1K2e082Azu1QyZ1KyQ03x7zHwNx9u4xkujtdrLspqJ
+الشرق|ogwcqxxwsQvzrtvJriugrAtQqJsYpnrsparepRrWpJrRpNrlpPrzpPsHpOsZogwc
+النرجس|XKroRU4FRn4OSh4_bNp0bdpRappRYroZXKro
+الندى|aUpIYroZZTnDZbmxbEnhaUpI
+الصحافة|WRpRUoohUVoYWBkyXHncWRpR
+الياسمين|TlqAXKroYroZXdn0XIncWRpRUoohUVoYT4pWTlqA
+الفلاح|cuoRbEnhbtmKb0l6ddmpcuoR
+الوادي|ZbmxaLlKb0l6btmKbEnhZbmx
+النفل|ZbmxaLlKZbmxXymCYikaYgkeXymCYikaYokdaLlK
+العقيق|VFmxTemCTcmBU9izWmjiWBkyVFmx
+الربيع|ZbmxXymCXEnUXRnpXmn6X9oEYroZZTnDZbmxWOlTWWllXEnU
+الغدير|XymCWOlTWBkyWmjiYikaXymC
+حطين|TcmBRmlMQwlTQclLPxk6Qqi2RDhuRahHRzhXU9izTcmB
+النخيل|WmjiRzhXRahHRtgmSef4UUh4VXhAXXh7Wmji
+المروج|ZTizY7jkW0jGXXh7ZTizYikaWmjiWyjKW0jG
+المصيف|aLlKaekia8jjZTizYikaYokdaLlKZTizYika
+التعاون|aLlKbnl0b0l6clkSa8jjaekiaLlK
+الازدهار|c9mbcLmEb0l6clkSeOlCddmpc9mb
+المحمدية|X_gNX3gJYHgQX_gNVqhKXXh7YJgRWkfjWLgQVXhAVqhK
+الملك فهد|YagZaEhJZTizXXh7YJgRYagZ
+المرسلات|ZTizaEhJbth5a8jjZTiz
+النزهة|dHjIclkSa8jjboiDbth5dXipdHjI
+المغرزات|e-jbeOlCd8i7e-jbdXipdpiyeOlCclkSdXip
+الواحة|dXipdyhudogodXgicvg_cdhKcPgwbth5dXip
+صلاح الدين|bth5cPgwcQgtcSggcIgacCgWcAgPb_gGayfoaEhJbth5
+الورود|YNgTYagZawfoY3euYJgRaEhJawfo
+الرحمانية|WkfjXOd-Y3euYJgRWkfj
+جامعة الملك سعود|Sff5T6eoUad7VcfBWkfkWUgEWFgYUUh4Sff5
+الرائد|XOd-VAc9Uad7VbfAWkfjXOd-
+الخزامى|Q-gqRahHR2gcUGeaUNePUad7UDdgT9dDT7c8T2c3TTdSS2dpSrd0SWeaRiegQ2eMQweKQIeHQfemQxfQQ3gZQ-gq
+عرقة|T2c3THbxTGbnTHbkTSbTTRa4TNavS-aeS1adSraiSjauSSa1SGazRVaaRJaaQ6aeQmaoQaagP4azP4azPmbOPgbROYbMOZb0OkcYPMdQQIeHQweKQ2eMRiegSWeaSrd0S2dpTTdST2c3
+المهدية|SSa1SjauSraiS1adSnZxSnZjSoZcSsZUSsZTScZIRxZpRHZkRQZsQ_ZvQ1ZqQwZ7QWZ7QLZ-P8aDOwZyNdZJK9XtGYVKFJWeIgaiL5bcO6bLPgbRPmbOP4azP4azQaagQmaoQ6aeRJaaRVaaSGazSSa1
+السفارات|Uad7UDdgT7c8ThccTZcITRb_THbxTGbnTHbkTSbTTRa4S7aWS7aOS6Z5SzZuS-ZfUSaTVkavV3bHV5baVzbsUad7
+الهدا|VdcPV4beV3bHVsa1VkavVeasUGaNS-ZfTBZWTEZTT6ZEWTXuWqZsWVaaWRamWPaxWrbbVdcP
+أم الحمام الغربي|XgbBXFbIVdcPVAc9XOd-XWduW3dWW0dPW9cWXgbB
+أم الحمام الشرقي|YlbEYkZ-XpauW9cWW0dSXRdtXTduXWduXtc9YUb9YWbnYlbE
+الشرفية|ZWZLYcYjWgYmWoZyZdZRZWZLWoZyWRamWSa8WhbNWrbbX8ahZdZR
+المعذر|ZAbFZcbHaDZsZdZRYkZ-YlbEZAbFZWZLZdZR
+المؤتمرات|a0aPaWZ6aDZsZcbHaZbdavaubCaaa0aP
+المعذر الشمالي|ZMcAZbbfZcbHYlbEYWbnYUb9Xtc9XOd-YGeXZMcA
+العليا|aZbdZcbHZabiYGeXZxfKaReKajeSaoeIasdubEc4bvdObWcKbVcFbtbKbrbDboa-bCaaavauaZbd
+السليمانية|bEc4asduaoeIajeSaReKZxfKayfoayfoa8fTbUe3cIefdVeHddeBded9didAdfc5c3cqbtbKbVcFbWcKbvdObEc4
+ظهرة لبن|ScZIRxZpRHZkRQZsQ_ZvQ1ZqQwZ7QWZ7QLZ-P8aDOwZyOsZdOaZUN9ZINrYtNAYEMyXzK6WcKDWRIpVoIdVcIaVLHwUoHLUYHOUiHdUmHhUrHsVCG-U-GdUxGOU4F6UuFlUvFhU0FXUgFSUfFNUQFmT9F7UCF3UJGKUNGiT_HFUGHJT8HRT_HhUEHvUCH4UWIvUYJJUlJzUGL7VfMKVJM7VJN2VGN_VnPJVpPmVXQLWBRGXYSPWrSwWmUhXNVlXAV1XCWHXQWTXuT6ZETEZTS1ZESzZESxZFSsZTScZI
+العريجاء|Y1WLZAV2Y5VlYqVaYlVRYfVQYfVaYWVhXxVeXiVhXMVmW9VcW1VbWCVcWGVuV7V-WVWbWpWiWrWnWrW2W1XIW9XPXCXKXJXHYWWsY1WL
+الرفعية|WgYmWeYfWTXuXJXHYWWsY1WLZSWLZTWhYrYqYYYiWgYm
+الناصرية|ZzYOaPYQaSYRahYpaDZsZhZTZhZTWeYfWgYmYYYiYrYqY5X6ZzYO
+الفاخرية|a3YoakYraSYRaPYQZzYOY5X6ZKXBayXxa3Yo
+عليشه|ayXxZKXBZTWhZUWeZUWbZSWLaZWNatWWayXx
+النموذجية|boYpbcYdbKYPazYUa3Yma3YoaqYtahYpaDZsbDaZbcZ9boYp
+الوشام|boYpbcYdbKYPazYUawXVbxXaboYp
+أم سليم|bxXaawXVauWwauWob2WwbxXa
+الشميسي|b2WwauWoatWWa1WSbbVfcBVZb2Ww
+الجرادية|cBVZbWViaxVYazVKa3U-a8U5bDUscDVFcBVZ
+صياح|cDVFbDUsbOUcbZUGbcT5cBUKcDVF
+الملقا|VFmxRmlMQwlTQclLPxk6PXl7PEnEP1nVQgoaQ2ovTlqAVFmx
+غرناطة|eMm-ddmpeOlChfmhhJnQguoIeMm-
+المربع|cMa_cRadcYaLcnaTdFaSdCZfczYRcMYIb6YEbtYHbcZ-bDaZbga1cKbtcMa_
+الفوطة|cMYIb6YEbtYHbxXadDXbdCXuczYRcMYI
+الديرة|cyXdbxXab9V8dAWpc7W6c1W5cyXMcyXU
+العمل|egYGdDXqczYRc5YveSYWegYG
+ثليم|exXndDXbdDXqegYGerX5ewXxexXn
+المرقب|d1XFexXndPXccyXdc1W5c7W6dAWpd1XF
+سلام|cBVZcRVXcVVXccWSb9V8cBVZ
+البطيحا|deVvdWV-dDV4dJVudeVv
+جبرة|deVvdWV-dDV4c6WMctWcc6WmdAWpdSWPddWGdnVwdeVv
+الوسيطا|clWXctWcdJVudCVtcmWWclWX
+معكال|cgWVcvVkdCVtclWXcgWV
+السكيرينه|c8U5dXVPdCVtcvVjc4VDc8U5
+منفوحة الجديدة|dnVwdCVtdXVPc8U5cvVjcWVXcaUSc6USeBUxdnVw
+غبيرا|eWU-flVvfwV2fVWBdwVbeBUxeWU-
+عتيقه|cDSUcgSucfS9caUScQVXcBVZcEUTbwTqbtTXb6SVb6SVcDSU
+البديعة|ZSWLY1WLZAV2Y5VlYqVaYlVRZHUVZUUSZiUSabU4a3U-azVKaxVYbWVia1WSatWWaZWNZSWL
+سلطانة|bcT5bZUGbOUca3U-abU4ZZULZLUHZcTnZsTQaBTeaFTfatTlbcT5
+الملك عبدالله|dyhud1iAeKiEeBiSdXipdyhudXipe-jbhEe9freCfpeGfpexfie1fie2fge8fYe8e_f_fOgXfIgafCgSeugWe0g4fEg-fLhRevheejhbeWhQebhbeliSegibeSiUeBiS
+حديقة الملك سلمان|eBiSeSiUegibeliSebhbeWhQejhbevhefLhRfEg-e0g4eugWfCgSfIgafOgXe_f_fYe8fge8fie2fie1fpexfpeGfreCeZdHdwc8didAddeBdVeHdTeIb9ejbXe2bBfMayfob_gGcAgPcCgWcIgacSggcQgtcPgwcdhKcvg_dXgidogod1iAeKiEeBiS
+الوزارات|cMa_cRadcYaLcnaTdFaSdFcyc1cocKbtcMa_
+الزهراء|djc0d2bdfJbve5cCedcPeUdFdjc4djc0
+الضباط|eBandjc0dfc5dFcydFaSd9aPd9ajeBan
+العود|d6XIeEXNecWtenWVeqVwdwVbdnVwddWGdSWPdAWpd6XI
+الصالحية|eEXNecWtegWjemWYeqVwfFV7fVWBfMWLe3XCe2XGexXleEXN
+الخالدية|gpXCgqW9fAWqfMWLfVWBfuV4gwVKhaU6hlVMheVbhaV3hFXDgpXC
+الصناعية القديمة|fCY5eSYWewXxe2XGe3XCfAWqgqW9gpXChFXDgvYUgfY2gSY-fCY5
+الملز|eBand9ajd9aPdFaSdCZfc5YvefYKekYme8Y3gZZBfVbhfJbvd1bcd_areBan
+جرير|fycLfhcBfQbzf1aOgGaig8a4gYcZfycL
+الربوة|iJdBhwd7hEe9ihbhiYcTiJdBihbhg8a4gYcZfycLfhcBfKbvefcPeUdEhEe9
+الصفا|jKaSiua6ihbhgIajf2aMgaZBjKaS
+الفاروق|hHXvhBXtg6Xsj1Y9jKaSgaZBgvYUg6Xsj1Y9
+الفيصلية|hvYBj1Y9g6XshaV3heVbhlVMiBVyiiWHkKWck4Wuj1Y9
+المنصوره|fwV2eBUxe1TIgxUThaU6gwVKgrVNfwV2
+منفوحة|eBUxe1TIdtSgdgTNdgTNdeT1dYULdNUaeBUx
+اليمامة|crSPcDSUcrSPdtSgdgTNdgTNdeT1dYULdNUac1URcaUScfS9cgSucDSU
+الدريهمية|aFSSaSSAa0SRb6SVbtTUbCTLbATOa7TPaFSS
+السويدي|b-UAbwTqbtTUbCTLayTWX4RbXAStX5TUYDTqYNTxYrTwZAUGZFUEZLUHZcTnZsTQaBTeaFTfatTlcBUKb-UA
+شبرا|WFQPWWP3XUQdYXQtZARBZzRkaSSAaFSSa7TPayTWWFQP
+العريجاء الوسطى|VGVLVkVeW1VbW9VcXDVeXGVgXMVmXiVhXxVeYWVhYfVaYfVQYlVRYqVDYIU9WSTwWSTwWJT9UXSyTXUPTiUoTzUeT6UZVGVL
+ظهرة البديعة|WUTxYVVCYhVDYqVDZHUVZUUSZiUSZZULY6UDY4T8YrTwYNTxYDTqX5TUXAStW1S8W1S8VDRxUXSyWJT9WUTx
+الزهرة|X4RbWFQPVDRxW1S8XAStX4Rb
+السويدي الغربي|TnQzViP2V7PxWWP3UgSkSwRaTIRCTnQz
+العريجاء الغربية|TdR4SeROR3RBQfTEP_TyQsUNQ0UgRBUkRNUHRiUXTdR4SwRaRvTHROUNQ4U7RCU9REVDRHVMRuVfR6VzSOVsSqVjTPVITBU0TSUpTTUYTXUPUgSkTdR4
+طويق|R3RBP1UBP-U1PMU9OxUyNnT2NKTvNATgMuTFLPSXLHSAKzR1KxRxKjRyKgRQJTQzIyP5IuPVF1N5ElNHD3MqEBMZE9MmFqMbGYM6HBNQGwNqGcNtGNN1GaN5HMOKIUORJMOXJ_OBKEN-LNN1LuOBLjOTMWOUMgOZMDOfMTOnNUOZN1OWOEOjQVOYQXOzRFO7QmPjQgPxQaQXQbQiQdQ3Q_Q0RIQnRYQoRjQ7RuQ_R3RB
+السلام|mGdInFdlllfxkGexlcc1mGdI
+ديراب|UhKmVTKJUnI_T2JbUhKm
+ظهرة نمار|UnNxVoN8WUOoWfOxWuO2W-POXYPrXeQgWWP3WMP0WCPyVpP0TIRCSwRaSZRMR3RBSBQuRnQxRdQfQbQiQaQXQgPxQmPjRFO7RNO0SQOnTMOeTVORTdOJT8OOUROZUmOYUpOKUwODUnNx
+الحزم|WaLiW_MnYuO7YgPHXuPQXbPiXYPrW-POWuO2WfOxWUOoVoN8UnNxUaNlUoNZUvMbWaLi
+نمار|b5SGb6SVauSPaSSAZzRkYyQ5YmQzYXQtXeQgXYPrXbPiXuPQYgPHYuO7ZPPibERPbVRcboRqb5SG
+أحد|XAI5XYJkVoKmVmKmTmHPTZG3TSGlTcGiTkG4TzG9T_HKUHHHUNHSUkHJU9HMU-HdVPHmVNHxVcH4VcILVmIXWEIYWJIrWeItWpIhW7IoW9IyXKI0XAI5
+عكاظ|XqNhasLSZ-KRaTKFaqJxayJhaHJyZ8JqZ0JbZlJnZIJnYyJRYtJcYYJWYJJbXkI7XUI9XKI0XAI5XYJkVoKmVmKmV3K_WaLiW6MhXqNh
+الشفا|cfSOcDSUcfSOcfSHcsRudVRDc4QmcZQUaZNsYuO7ZPPibERPbVRcboRqcDSU
+المروة|YuO7XqNhZTMTaZNsYuO7
+بدر|ckQdc4QmdVRDeYPzezO8fQO2fsOsdWLgcbMKb6LdaqJxaTKFZ-KRasLSZTMTcZQUcdQZckQd
+المصانع|eZS3e1TIfRShiFNaiLNIiQMaiRL4iULmicLAiPK_hzLHheLQhTLYhMLihJLxhNMQhCM-gpNagAOJfuOlfsOsfQO2ezO8eYPzdVRDcsRucfSHcrSPdtSgeZS3
+المنصورية|nrK0lPNSkMPRhuODiFNaiLNIiQMaiRL4igK1i8KZjlJhkhIQnrK0
+طيبة|m_RGmkQgkMPRlPNSnrK0oTLuomL6qiOppIPnm_RG
+الدار البيضاء|lYSdm_RGmkQgkMPRhuODguP4k6SDlYSd
+المناخ|kgWji2WOibWEh6VrhaU6h7UqibUQkMTSlYSdmnTGmeTamjTwmJUjmwU2mdVEmLVPlgVik4WukgWj
+العزيزية|e1TIfWSbfrR0gvP5h_QjlESKlVScksS8ilUJhbU4hDUfe2TH
+الدفاع|lYSdm_RGnjR4nnR7nsR7oBR5oIR3oXRuotRqpTR1pfR-pjSEpsSnpDS8oBT_nxUKmwU2mJUjmjTwmeTamnTGlYSd
+الاسكان|psSnq4SUqzR9pIPnm_RGnjR4nnR7nsR7oBR5oIR3oXRuotRqpTR1pfR-pjSEpsSn
+At Turayf Al Jadid|PfiJPqh-PrhnP2hZQGhYQIhTQJhSQmhaQjhkQaiBQBimPfiKPfiJ`;
+const ALPHABET='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+function unpack(s){let points=[];for(let k=0;k+3<s.length;k+=4){let x=ALPHABET.indexOf(s[k])*64+ALPHABET.indexOf(s[k+1]);let y=ALPHABET.indexOf(s[k+2])*64+ALPHABET.indexOf(s[k+3]);points.push([46.4+x/4095*.7,24.4+y/4095*.65]);}return points;}
+const FALLBACK=COMPACT.trim().split('\n').map((line,i)=>{let [name,enc]=line.split('|');return {type:'Feature',properties:{name_ar:name,id:i+1},geometry:{type:'Polygon',coordinates:[unpack(enc)]}}});
+const LOCAL_SOURCE='Bundled OSM geometry / simplified';
+let districts=FALLBACK.map((feature,i)=>decorate(feature,i)),byName=new Map(),svgPaths=new Map(),labels=new Map(),selected=null,stats=new Map(),selectedNames=new Set(),viewBox=null,hasMoved=false,downAt=null,sourceMode='offline';
+const svgNS='http://www.w3.org/2000/svg';
+const $=s=>document.getElementById(s);
+const quickNames=['الملقا','الياسمين','الصحافة','المحمدية','الرحمانية','أم الحمام الشرقي','أم الحمام الغربي','صلاح الدين','السليمانية','العليا','حطين','العقيق','النخيل','الورود'];
+function notify(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>$('toast').classList.remove('show'),2700);}
+function cleanName(s){return String(s||'').replace(/^حي\s+/,'').replace(/\s+/g,' ').trim();}
+function coordsOf(feature){let g=feature.geometry;if(!g)return[];if(g.type==='Polygon')return g.coordinates;if(g.type==='MultiPolygon')return g.coordinates.flat();return[];}
+function decorate(f,id){let rings=coordsOf(f);let main=rings.reduce((a,b)=>b.length>a.length?b:a,[]);let a=polygonCenter(main);let coords=main.length?main[0]:[46.7,24.7];return {feature:f,id,name:cleanName(f.properties.name_ar||f.properties.name||('حي '+id)),rings,center:a||coords,area:totalArea(rings),bbox:bounding(rings)};}
+function bounding(rings){let box=[Infinity,Infinity,-Infinity,-Infinity];for(const ring of rings)for(let p of ring){box[0]=Math.min(box[0],p[0]);box[1]=Math.min(box[1],p[1]);box[2]=Math.max(box[2],p[0]);box[3]=Math.max(box[3],p[1])}return box;}
+function pointInRing(point,ring){let [x,y]=point,inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){let [xi,yi]=ring[i],[xj,yj]=ring[j];if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)inside=!inside;}return inside;}
+function polygonCenter(ring){if(!ring.length)return null;let bx=bounding([ring]),p=[(bx[0]+bx[2])/2,(bx[1]+bx[3])/2];if(pointInRing(p,ring))return p;let sum=[0,0];ring.forEach(q=>{sum[0]+=q[0];sum[1]+=q[1]});sum=sum.map(n=>n/ring.length);if(pointInRing(sum,ring))return sum;for(let v of [.25,.5,.75])for(let u of [.25,.5,.75]){let q=[bx[0]+u*(bx[2]-bx[0]),bx[1]+v*(bx[3]-bx[1])];if(pointInRing(q,ring))return q}return ring[0];}
+function totalArea(rings){let total=0;for(let ring of rings){if(ring.length<3)continue;let lat=ring.reduce((s,p)=>s+p[1],0)/ring.length,scale=Math.cos(lat*Math.PI/180);let a=0;for(let i=0;i<ring.length;i++){let p=ring[i],q=ring[(i+1)%ring.length];a+=p[0]*q[1]-q[0]*p[1];}total+=Math.abs(a)*.5*111.32*111.32*scale;}return total;}
+// Equirectangular local projection; no arbitrary movement of polygon boundaries.
+const PX_PER_DEG=1650,BASE_LON=46.4,BASE_NORTH=25.05,LON_COS=Math.cos(24.72*Math.PI/180);
+const xy=p=>[(p[0]-BASE_LON)*PX_PER_DEG*LON_COS,(BASE_NORTH-p[1])*PX_PER_DEG];
+const toPath=rings=>rings.map(r=>r.map((p,i)=>{let [x,y]=xy(p);return (i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2)}).join(' ')+' Z').join(' ');
+function createSvg(name,attrs,parent){let el=document.createElementNS(svgNS,name);for(let k in attrs)el.setAttribute(k,attrs[k]);parent.appendChild(el);return el;}
+function renderMap(){let layer=$('districtLayer'),label=$('labelLayer');layer.replaceChildren();label.replaceChildren();svgPaths.clear();labels.clear();byName=new Map(districts.map(d=>[d.name,d]));for(let d of districts){let p=createSvg('path',{d:toPath(d.rings),class:'district-path'+(selectedNames.has(d.name)?' is-selected':''),'data-name':d.name,tabindex:'0',role:'button','aria-label':'تحديد '+d.name},layer);createSvg('title',{},p).textContent=d.name;svgPaths.set(d.name,p);p.addEventListener('click',e=>{if(hasMoved)return;choose(d.name);});p.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation();choose(d.name);showDetails(d.name)});p.addEventListener('keydown',e=>{if(e.key==='Enter'){choose(d.name);if(e.shiftKey)showDetails(d.name)}});let [x,y]=xy(d.center);let text=createSvg('text',{x:x.toFixed(1),y:y.toFixed(1),class:'district-label'+(selectedNames.has(d.name)?' is-selected':''),'data-name':d.name},label);text.textContent=d.name;labels.set(d.name,text);}refreshLabels();$('countTop').textContent=districts.length;$('countSide').textContent=districts.length;}
+function renderGrid(){let layer=$('geoGrid');layer.replaceChildren();for(let lat=24.4;lat<25.05;lat+=.05){let [x,y]=xy([46.4,lat]);createSvg('line',{x1:0,y1:y,x2:1100,y2:y},layer);}for(let lon=46.4;lon<=47.05;lon+=.05){let [x,y]=xy([lon,25.05]);createSvg('line',{x1:x,y1:0,x2:x,y2:1150},layer);}}
+function setBox(b){viewBox={x:b[0],y:b[1],w:b[2],h:b[3]};updateBox();}
+function updateBox(){$('mapSvg').setAttribute('viewBox',[viewBox.x,viewBox.y,viewBox.w,viewBox.h].map(n=>+n.toFixed(2)).join(' '));refreshLabels()}
+const fullBox=[10,15,1060,1110],urbanBox=[120,160,635,770];
+function fitCore(){$('coreBtn').classList.add('active');$('allBtn').classList.remove('active');setBox(urbanBox)}
+function fitAll(){$('allBtn').classList.add('active');$('coreBtn').classList.remove('active');setBox(fullBox)}
+function focusDistrict(d){let [x1,y1]=xy([d.bbox[0],d.bbox[3]]),[x2,y2]=xy([d.bbox[2],d.bbox[1]]);let w=Math.max(115,x2-x1),h=Math.max(115,y2-y1),s=1.8;setBox([(x1+x2)/2-w*s/2,(y1+y2)/2-h*s/2,w*s,h*s]);$('coreBtn').classList.remove('active');$('allBtn').classList.remove('active');}
+function refreshLabels(){
+ if(!viewBox)return;
+ const rect=$('mapSvg').getBoundingClientRect();if(!rect.width||!rect.height)return;
+ const scale=Math.min(rect.width/viewBox.w,rect.height/viewBox.h),marginX=(rect.width-viewBox.w*scale)/2,marginY=(rect.height-viewBox.h*scale)/2;
+ const itemFont=12/scale;
+ const sorted=[...districts].sort((a,b)=>(b.name===selected?1:0)-(a.name===selected?1:0)||(quickNames.includes(b.name)?1:0)-(quickNames.includes(a.name)?1:0)||b.area-a.area);
+ const occ=[],limit=rect.width<500?18:(viewBox.w<320?65:38);let visible=0;
+ for(const d of districts){let el=labels.get(d.name);if(el)el.style.display='none'}
+ for(const d of sorted){let el=labels.get(d.name);if(!el)continue;
+   const [x,y]=xy(d.center),sx=marginX+(x-viewBox.x)*scale,sy=marginY+(y-viewBox.y)*scale;
+   if(sx<-50||sx>rect.width+50||sy<-30||sy>rect.height+30)continue;
+   let isSelected=d.name===selected,isCandidate=isSelected||viewBox.w<360||(viewBox.w<650&&(d.area>.5||quickNames.includes(d.name)))||(viewBox.w>=650&&(d.area>3.5||quickNames.includes(d.name)));
+   if(!isCandidate)continue;
+   let h=16,w=Math.min(180,Math.max(38,d.name.length*7.15+12)),box=[sx-w/2,sy-h/2,sx+w/2,sy+h/2];
+   if(!isSelected&&occ.some(b=>!(box[2]+6<b[0]||box[0]-6>b[2]||box[3]+6<b[1]||box[1]-6>b[3])))continue;
+   if(!isSelected&&visible>=limit)continue;
+   occ.push(box);visible++;el.style.display='';el.setAttribute('font-size',itemFont.toFixed(2));el.setAttribute('opacity',isSelected?'1':'.8');
+ }
+}
+function choose(name,focus=false){let d=byName.get(name);if(!d)return;selected=name;selectedNames.clear();selectedNames.add(name);for(let [n,p] of svgPaths)p.classList.toggle('is-selected',n===name);for(let [n,t] of labels)t.classList.toggle('is-selected',n===name);$('selectedName').textContent=name;$('selectedMeta').textContent=d.area.toFixed(2)+' كم² · انقر مرتين للتفاصيل';$('detailsBtn').disabled=false;$('mobileDetailBtn').classList.remove('hidden');document.querySelectorAll('.neighborhood-list button').forEach(b=>b.classList.toggle('active',b.dataset.name===name));if(focus)focusDistrict(d);else refreshLabels()}
+function format(n){return new Intl.NumberFormat('ar-SA',{maximumFractionDigits:0}).format(n)}
+function optional(v){let n=Number(v);return v!==null&&v!==undefined&&String(v).trim()!==''&&Number.isFinite(n)&&n>=0?n:null;}
+function showDetails(name){let d=byName.get(name);if(!d)return;choose(name);let row=stats.get(name)||{},p=optional(row.population_estimate),sa=optional(row.saudi_pct),ex=optional(row.non_saudi_pct),b=optional(row.commercial_count);let valid=!!(row.source&&row.year);if(!valid){p=null;sa=null;ex=null;b=null;}
+$('detailName').textContent=name;$('detailEn').textContent='DISTRICT / '+String(d.id+1).padStart(3,'0');$('area').textContent=d.area>=10?d.area.toFixed(1):d.area.toFixed(2);$('population').textContent=p===null?'—':format(p);$('population').classList.toggle('unknown',p===null);$('populationYear').textContent=p===null?'يتطلب بيانات للحي':('سنة '+row.year+' · '+(row.method||'تقدير'));$('businesses').textContent=b===null?'—':format(b);$('businesses').classList.toggle('unknown',b===null);$('coords').textContent=d.center[1].toFixed(4)+', '+d.center[0].toFixed(4);$('saudi').textContent=sa===null?'—':sa.toFixed(1)+'%';$('foreign').textContent=ex===null?'—':ex.toFixed(1)+'%';$('nationNote').textContent=sa===null||ex===null?'N / A':'ESTIMATE';$('saudiBar').style.width=sa!==null&&ex!==null?sa+'%':'50%';$('foreignBar').style.width=sa!==null&&ex!==null?ex+'%':'50%';$('saudiBar').style.background=sa!==null?'#fe5000':'';$('foreignBar').style.background=ex!==null?'#6cace4':'';
+let hasMetrics=p!==null||sa!==null||ex!==null||b!==null;$('qualityNote').textContent=hasMetrics?'البيانات الإحصائية محمّلة من ملف خارجي، المصدر: '+row.source+'، سنة '+row.year+'. '+(row.method?'طريقة التقدير: '+row.method+'. ':'')+'راجع منهجية المصدر قبل اعتماد الأرقام.':'لا تتوفر حاليًا إحصاءات موثقة قابلة للإسناد إلى هذا الحي. الشرطات تعني بيانات غير متاحة وليست صفرًا.';
+$('sourceDescription').textContent='المصدر الجغرافي: '+(sourceMode==='online'?'ملف GeoJSON الأصلي':LOCAL_SOURCE)+'. المساحة محسوبة من الهندسة الجغرافية وليست قياسًا مساحيًا رسميًا.'+(hasMetrics?' المصدر الإحصائي: '+row.source+' ('+row.year+').':' لا تُستنتج المؤشرات الديموغرافية من المساحة وحدها.');$('details').classList.add('open');}
+function searchSuggestions(q){let box=$('results');if(!q.trim()){box.classList.add('hidden');return}q=cleanName(q);let hit=districts.filter(d=>d.name.includes(q)).slice(0,13);box.innerHTML='';if(!hit.length){box.classList.add('hidden');return}for(let d of hit){let b=document.createElement('button');b.className='suggestion';b.type='button';let a=document.createElement('span');a.textContent=d.name;let n=document.createElement('small');n.textContent=d.area.toFixed(1)+' km²';b.append(a,n);b.onclick=()=>{$('search').value=d.name;box.classList.add('hidden');choose(d.name,true);showDetails(d.name)};box.append(b)}box.classList.remove('hidden')}
+function buildQuick(){let box=$('quick');box.replaceChildren();quickNames.filter(n=>byName.has(n)).forEach(name=>{let b=document.createElement('button');b.type='button';b.textContent=name;b.dataset.name=name;b.onclick=()=>{choose(name,true);if(window.innerWidth<760)showDetails(name)};box.append(b)})}
+function screenWorld(evt){let svg=$('mapSvg'),p=svg.createSVGPoint();p.x=evt.clientX;p.y=evt.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+function zoom(factor,center){let vb=viewBox;if(!vb)return;let anchor=center||{x:vb.x+vb.w/2,y:vb.y+vb.h/2},newW=Math.max(52,Math.min(1500,vb.w*factor)),newH=Math.max(52,Math.min(1500,vb.h*factor)),ratio=newW/vb.w;setBox([anchor.x-(anchor.x-vb.x)*ratio,anchor.y-(anchor.y-vb.y)*ratio,newW,newH]);$('coreBtn').classList.remove('active');$('allBtn').classList.remove('active')}
+function initEvents(){const svg=$('mapSvg'),canvas=$('mapContainer');let pointer=null,start=null,startView=null,wasDragging=false;canvas.addEventListener('pointerdown',e=>{if(e.button!==0)return;pointer=e.pointerId;start={x:e.clientX,y:e.clientY};startView={...viewBox};wasDragging=false;try{canvas.setPointerCapture(pointer)}catch{};canvas.classList.add('grabbing')});canvas.addEventListener('pointermove',e=>{if(pointer!==e.pointerId||!start)return;let dx=e.clientX-start.x,dy=e.clientY-start.y;if(Math.hypot(dx,dy)<5&&!wasDragging)return;wasDragging=true;hasMoved=true;let rect=svg.getBoundingClientRect(),k=Math.max(startView.w/rect.width,startView.h/rect.height);setBox([startView.x-dx*k,startView.y-dy*k,startView.w,startView.h]);});const end=e=>{if(pointer===e.pointerId){pointer=null;start=null;canvas.classList.remove('grabbing');setTimeout(()=>hasMoved=false,50)}};canvas.addEventListener('pointerup',end);canvas.addEventListener('pointercancel',end);svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY>0?1.15:.87,screenWorld(e))},{passive:false});svg.addEventListener('dblclick',e=>e.preventDefault());$('plus').onclick=()=>zoom(.77);$('minus').onclick=()=>zoom(1.27);$('reset').onclick=fitCore;$('coreBtn').onclick=fitCore;$('allBtn').onclick=fitAll;$('clearBtn').onclick=()=>{selected=null;selectedNames.clear();svgPaths.forEach(p=>p.classList.remove('is-selected'));labels.forEach(p=>p.classList.remove('is-selected'));$('selectedName').textContent='لم يتم تحديد حي';$('selectedMeta').textContent='انقر على إحدى المساحات في الخريطة';$('detailsBtn').disabled=true;$('mobileDetailBtn').classList.add('hidden');$('details').classList.remove('open');refreshLabels()};$('detailsBtn').onclick=()=>selected&&showDetails(selected);$('mobileDetailBtn').onclick=()=>selected&&showDetails(selected);$('closeDetails').onclick=()=>$('details').classList.remove('open');$('search').oninput=e=>searchSuggestions(e.target.value);$('search').onkeydown=e=>{if(e.key==='Escape')$('results').classList.add('hidden')};document.addEventListener('click',e=>{if(!e.target.closest('.searchbox'))$('results').classList.add('hidden')});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('details').classList.remove('open')});window.addEventListener('resize',refreshLabels);setTimeout(refreshLabels,250);$('importCsv').onchange=async e=>{let f=e.target.files?.[0];if(!f)return;try{let text=await f.text(),rows=csvToObjects(text);let next=new Map(),ignored=0;for(let row of rows){let name=cleanName(row.name_ar||row.name||'');if(!byName.has(name)){ignored++;continue}if(!row.source||!row.year){ignored++;continue}let sa=optional(row.saudi_pct),ex=optional(row.non_saudi_pct);if(sa!==null&&ex!==null&&Math.abs(sa+ex-100)>2){ignored++;continue}next.set(name,row)}stats=next;$('dataStatus').textContent='تم ربط '+next.size+' أحياء ببيانات الإحصاءات؛ '+ignored+' صف مستبعد.';notify('تم تحميل '+next.size+' سجلًا موثق المصدر');if(selected&&$('details').classList.contains('open'))showDetails(selected)}catch(err){notify('تعذر قراءة CSV: '+err.message)}};$('exportBtn').onclick=exportSelected;}
+function csvToObjects(raw){let lines=[],fields=[],cell='',quoted=false;raw=raw.replace(/^\uFEFF/,'');for(let i=0;i<raw.length;i++){let c=raw[i];if(c==='"'){if(quoted&&raw[i+1]==='"'){cell+='"';i++}else quoted=!quoted}else if(c===','&&!quoted){fields.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&raw[i+1]==='\n')i++;fields.push(cell);if(fields.some(x=>x!==''))lines.push(fields);fields=[];cell=''}else cell+=c}fields.push(cell);if(fields.some(x=>x!==''))lines.push(fields);let header=(lines.shift()||[]).map(x=>x.trim());if(!header.includes('name_ar')&&!header.includes('name'))throw Error('الملف يحتاج عمود name_ar');return lines.map(line=>Object.fromEntries(header.map((h,i)=>[h,(line[i]||'').trim()])))}
+function exportSelected(){let rows=selected?[byName.get(selected)]:[],h='name_ar,area_km2,population_estimate,saudi_pct,non_saudi_pct,commercial_count,source,year,method\n';rows.forEach(d=>{let st=stats.get(d.name)||{};let values=[d.name,d.area.toFixed(2),st.population_estimate||'',st.saudi_pct||'',st.non_saudi_pct||'',st.commercial_count||'',st.source||'',st.year||'',st.method||''];h+=values.map(s=>'"'+String(s).replace(/"/g,'""')+'"').join(',')+'\n'});if(!rows.length){notify('اختر حيًا أولًا');return}let url=URL.createObjectURL(new Blob(['\uFEFF'+h],{type:'text/csv;charset=utf-8'}));let a=document.createElement('a');a.href=url;a.download='riyadh-selected-neighborhood.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+// Optional 2021 population estimates from a public ArcGIS feature layer. These are
+// NOT an official census and are shown with explicit method/year qualification.
+function fetchPopulationLayer(){
+ const uri='https://services7.arcgis.com/co15Y7Q02mBEZqnK/ArcGIS/rest/services/Riyadh_Metro_WebMapv2_WFL1/FeatureServer/0/query?where=1%3D1&outFields=NEIGHBORHANAME%2Csum_population_per_point2021&returnGeometry=false&f=json';
+ return fetch(uri,{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('population unavailable');return r.json()}).then(obj=>{
+  if(!Array.isArray(obj.features))return;
+  let count=0;
+  for(let feat of obj.features){let a=feat.attributes||{},name=cleanName(a.NEIGHBORHANAME),value=optional(a.sum_population_per_point2021);
+   if(!name||!byName.has(name)||value===null||value<10||value>1000000||stats.has(name))continue;
+   stats.set(name,{population_estimate:Math.round(value),source:'ArcGIS open layer / Riyadh Metro WebMapv2',year:'2021',method:'تجميع تقديرات نقاط سكانية منشورة؛ ليست بيانات تعداد معتمدة'});
+   count++;
+  }
+  if(count){$('dataStatus').textContent='تقديرات عدد السكان لعام 2021 متاحة لبعض الأحياء ('+count+'). المصدر غير رسمي؛ الجنسية والمنشآت تحتاج مصادر منفصلة.';if(selected&&$('details').classList.contains('open'))showDetails(selected)}
+ });
+}
+function init(){renderGrid();fitCore();renderMap();buildQuick();initEvents();fetch('https://raw.githubusercontent.com/i1s1i/GIS-rcrc-map/main/data/riyadh_districts.geojson',{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('network');return r.json()}).then(data=>{if(!Array.isArray(data.features)||data.features.length<130)throw Error('missing geometry');districts=data.features.map(decorate).filter(d=>d.rings.length);sourceMode='online';renderMap();buildQuick();if(selected&&byName.has(selected))choose(selected);$('mapStatus').textContent='FULL GEOJSON / SOURCE GEOMETRY';}).catch(()=>{$('mapStatus').textContent='BUNDLED GEOJSON / ~50M SIMPLIFICATION'});fetchPopulationLayer().catch(()=>{})}
+init();
+</script>
+</body></html>
